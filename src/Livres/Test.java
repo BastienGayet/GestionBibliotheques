@@ -8,7 +8,7 @@ public class Test
             Auteur auteur1 = new Auteur("Doe", "John", LocalDate.of(1985, 2, 20), "Américain");
 
             // Création d'un livre
-            LivreFiction livre1 = new LivreFiction("Titre du livre", 2022, auteur1, 20.5, 9781234567890L, true, "Editions ABC","Fantastique");
+            LivreFiction livre1 = new LivreFiction("Titre du livre", 2022, "Doe", 20.5, 9781234567890L, true, "Editions ABC","Fantastique");
 
             // Affichage des informations du livre
             System.out.println("Titre : " + livre1.getTitre());
@@ -29,13 +29,13 @@ public class Test
 
 
 
-            Auteur auteur = new Auteur("Smith", "John", LocalDate.of(1985, 5, 12), "Américain");
+           // Auteur auteur = new Auteur("Smith", "John", LocalDate.of(1985, 5, 12), "Américain");
 
             // Création d'un livre de fiction
             LivreFiction livreFiction = new LivreFiction();
             livreFiction.setTitre("Titre du livre de fiction");
             livreFiction.setAnneePublication(2022);
-            livreFiction.setAuteurs(auteur);
+            livreFiction.setAuteurs("John");
             livreFiction.setPrix(15.99);
             livreFiction.setIsbn(1234567890123L);
             livreFiction.setDisponible(true);
@@ -49,8 +49,8 @@ public class Test
 
 
 
-             Auteur auteurs = new Auteur("Doe", "John", LocalDate.of(1970, 1, 1), "USA");
-            LivreNonFiction livre = new LivreNonFiction("Therorie java", 2022, auteurs, 20.5, 1234567890123L, true, "Éditeur", "Informatique");
+             //Auteur auteurs = new Auteur("Doe", "John", LocalDate.of(1970, 1, 1), "USA");
+            LivreNonFiction livre = new LivreNonFiction("Therorie java", 2022, "Doe", 20.5, 1234567890123L, true, "Éditeur", "Informatique");
             System.out.println(livre.toString());
         }
 

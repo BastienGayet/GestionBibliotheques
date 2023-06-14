@@ -12,11 +12,11 @@ public class LivreNonFiction  extends Livre
         this.domaine = domaine;
     }
     public LivreNonFiction() {
-        super("", 0, new Auteur(), 0.0, 0, false, "");
+        super("", 0, "", 0.0, 0, false, "");
         this.domaine = "";
     }
 
-    public LivreNonFiction(String titre, int anneePublication, Auteur auteurs, double prix, long isbn, boolean disponible, String editeur, String domaine) {
+    public LivreNonFiction(String titre, int anneePublication, String auteurs, double prix, long isbn, boolean disponible, String editeur, String domaine) {
         super(titre, anneePublication,auteurs, prix, isbn, disponible, editeur);
         this.domaine = domaine;
     }

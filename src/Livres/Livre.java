@@ -5,7 +5,7 @@ public abstract class Livre
 {
     private String titre;
     private int anneePublication;
-    private Auteur auteur;
+    private String auteur;
     private double prix;
     private long isbn;
     private boolean disponible;
@@ -28,11 +28,11 @@ public abstract class Livre
         this.anneePublication = anneePublication;
     }
 
-    public Auteur getAuteursnom() {
+    public String getAuteursnom() {
         return auteur;
     }
 
-    public void setAuteurs(Auteur auteurs) {
+    public void setAuteurs(String auteurs) {
         this.auteur = auteurs;
     }
 
@@ -79,7 +79,7 @@ public abstract class Livre
         this.editeur = "";
     }
     //const init
-    public Livre(String titre, int anneePublication, Auteur auteur, double prix, long isbn, boolean disponible, String editeur) {
+    public Livre(String titre, int anneePublication, String auteur, double prix, long isbn, boolean disponible, String editeur) {
         this.titre = titre;
         this.anneePublication = anneePublication;
         this.auteur = auteur;
@@ -89,32 +89,32 @@ public abstract class Livre
         this.editeur = editeur;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Livre livre)) return false;
+
+        if (getAnneePublication() != livre.getAnneePublication()) return false;
+        if (Double.compare(livre.getPrix(), getPrix()) != 0) return false;
+        if (getIsbn() != livre.getIsbn()) return false;
+        if (isDisponible() != livre.isDisponible()) return false;
+        if (!getTitre().equals(livre.getTitre())) return false;
+        if (!auteur.equals(livre.auteur)) return false;
+        return getEditeur().equals(livre.getEditeur());
+    }
 
     @Override
     public String toString() {
         return "Livre{" +
                 "titre='" + titre + '\'' +
                 ", anneePublication=" + anneePublication +
-                ", auteurs=" + auteur.getNom() +
+                ", auteurs=" + auteur +
                 ", prix=" + prix +
                 ", isbn=" + isbn +
                 ", disponible=" + disponible +
                 ", editeur='" + editeur + '\'' +
                 '}';
     }
-   /* public void Affiche() {
-        System.out.println(this);
-    }*/
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Livre livre)) return false;
-        if (getAnneePublication() != livre.getAnneePublication()) return false;
-        if (Double.compare(livre.getPrix(), getPrix()) != 0) return false;
-        if (getIsbn() != livre.getIsbn()) return false;
-        if (isDisponible() != livre.isDisponible()) return false;
-        if (getTitre() != null ? !getTitre().equals(livre.getTitre()) : livre.getTitre() != null) return false;
-        if (getAuteursnom() != null ? !getAuteursnom().equals(livre.getAuteursnom()) : livre.getAuteursnom() != null) return false;
-        return getEditeur() != null ? getEditeur().equals(livre.getEditeur()) : livre.getEditeur() == null;
-    }
+
+
 }

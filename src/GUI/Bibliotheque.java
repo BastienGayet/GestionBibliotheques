@@ -1,68 +1,76 @@
 package GUI;
+
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
-public class Bibliotheque extends JFrame
-{
+public class Bibliotheque extends JFrame {
 
-    private JPanel mainPanel;
-    private JButton auteurButton;
-    private JButton membreButton;
-    private JButton livreButton;
     private JButton pretButton;
+    private JButton livreFictionButton;
+    private JButton membreRegularButton;
+    private JButton buttonAuteur;
+    private JPanel panel1;
+    private JButton livreNonFictionButton;
+    private JButton membrePremiumButton;
 
-
-    public Bibliotheque()
-    {
-        //setSize(1000,1000);
+    public Bibliotheque() {
         setTitle("Gestion Bibliotheque JAVA");
-        setContentPane(mainPanel);
+        setContentPane(panel1);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-       // Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
-        auteurButton.addActionListener(new ActionListener() {
+        buttonAuteur.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              
-
+                JdialogAuteur dialog = new JdialogAuteur(null, true, "Auteur");
+                dialog.setVisible(true);
             }
-        });
-        
-        membreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
         });
-        livreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        
         pretButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JdialogPrets dialog = new JdialogPrets(null, true, "Pret");
+                dialog.setVisible(true);
+            }
+        });
+        membreRegularButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JdialogMembreRegular dialog = new JdialogMembreRegular(null, true , "Membre Regular");
+                dialog.setVisible(true);
+            }
+        });
+        membrePremiumButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JdialogMembrePremium dialog = new JdialogMembrePremium(null, true, "Membre Premium");
+                dialog.setVisible(true);
+            }
+        });
+        livreNonFictionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JdialogLivreNonFiction dialog = new JdialogLivreNonFiction(null, true, "Livre Non Fiction");
+                dialog.setVisible(true);
+            }
+        });
+        livreFictionButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JdialogLivreFiction dialog = new JdialogLivreFiction(null, true, "Livre Fiction ");
+                dialog.setVisible(true);
             }
         });
     }
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args){
+
         Bibliotheque bibliotheque = new Bibliotheque();
         bibliotheque.pack();
         bibliotheque.setLocationRelativeTo(null);
         bibliotheque.setVisible(true);
         bibliotheque.setSize(500,500);
-
     }
 }
 

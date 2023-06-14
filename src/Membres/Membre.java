@@ -2,7 +2,7 @@ package Membres;
 
 import java.time.LocalDate;
 
-public class Membre
+public  class Membre
 {
     private String nom;
     private String adresse;
@@ -69,7 +69,6 @@ public class Membre
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Membre membre)) return false;
-
         if (getNumeroMembre() != membre.getNumeroMembre()) return false;
         if (!getNom().equals(membre.getNom())) return false;
         if (!getAdresse().equals(membre.getAdresse())) return false;

@@ -16,7 +16,7 @@ public class Main {
         Auteur auteur1 = new Auteur("J.K.Rowling", "Royaume-Uni",LocalDate.now(), "Anglais");
 
         // Création d'un livre
-        LivreNonFiction livre1 = new LivreNonFiction("Harry Potter et la pierre philosophale", 1997,  auteur1, 12.99, 9782070541261L, true, "Gallimard","Historique");
+        LivreNonFiction livre1 = new LivreNonFiction("Harry Potter et la pierre philosophale", 1997,  "J.K.R", 12.99, 9782070541261L, true, "Gallimard","Historique");
 
         // Création d'un membre
         Membre membre1 = new Membre("Dupont", "3 rue des Lilas, Paris", 123456, LocalDate.now());

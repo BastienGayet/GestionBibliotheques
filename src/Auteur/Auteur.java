@@ -72,7 +72,6 @@ public class Auteur
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Auteur auteur)) return false;
-
         if (getNom() != null ? !getNom().equals(auteur.getNom()) : auteur.getNom() != null) return false;
         if (getPrenom() != null ? !getPrenom().equals(auteur.getPrenom()) : auteur.getPrenom() != null) return false;
         if (getDateNaissance() != null ? !getDateNaissance().equals(auteur.getDateNaissance()) : auteur.getDateNaissance() != null)

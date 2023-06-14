@@ -14,11 +14,11 @@ public class LivreFiction extends Livre
     }
 
     public LivreFiction() {
-        super("", 0, new Auteur(), 0.0, 0, false, "");
+        super("", 0, "", 0.0, 0, false, "");
         this.genre = "";
     }
 
-    public LivreFiction(String titre, int anneePublication, Auteur auteurs, double prix, long isbn, boolean disponible, String editeur, String genre) {
+    public LivreFiction(String titre, int anneePublication, String auteurs, double prix, long isbn, boolean disponible, String editeur, String genre) {
         super(titre, anneePublication, auteurs, prix, isbn, disponible, editeur);
         this.genre = genre;
     }
