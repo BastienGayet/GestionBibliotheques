@@ -19,7 +19,6 @@ public class JdialogLivreNonFiction extends JDialog
     private JTextField textFieldAnnePubli;
     private JTextField textFieldDomaine;
     private JCheckBox disponibleCheckBox;
-    private JButton modifierButton;
     private JLabel titreLabel;
     private JLabel auteurLabel;
     private JLabel prixLabel;

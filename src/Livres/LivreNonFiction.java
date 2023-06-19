@@ -23,9 +23,7 @@ public class LivreNonFiction  extends Livre
 
     @Override
     public String toString() {
-        return  super.toString() + "LivreNonFiction{" +
-                "domaine='" + domaine + '\'' +
-                '}';
+        return  getTitre() + "-Non-Fiction";
     }
     /*public void Affiche() {
         System.out.println(this);

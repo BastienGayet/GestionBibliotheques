@@ -5,10 +5,13 @@ import Auteur.Auteur;
 import Pret.*;
 
 import javax.swing.table.DefaultTableModel;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 public class Bibliotheque {
         private static Bibliotheque instance = null;
 
@@ -28,11 +31,12 @@ public class Bibliotheque {
             this.ListeAuteurs = new ArrayList<>();
 
             // Ajout des auteurs prédéfinis
-            ListeAuteurs.add(new Auteur("Hugo", "Victor", LocalDate.parse("1802-02-26"), "Français"));
+            /*ListeAuteurs.add(new Auteur("Hugo", "Victor", LocalDate.parse("1802-02-26"), "Français"));
             ListeAuteurs.add(new Auteur("Tolkien", "J.R.R.", LocalDate.parse("1892-01-03"), "Britannique"));
             ListeAuteurs.add(new Auteur("Rowling", "J.K.", LocalDate.parse("1965-07-31"), "Britannique"));
             ListeAuteurs.add(new Auteur("Austen", "Jane", LocalDate.parse("1775-12-16"), "Britannique"));
-            ListeAuteurs.add(new Auteur("Hemingway", "Ernest", LocalDate.parse("1899-07-21"), "Américain"));
+            ListeAuteurs.add(new Auteur("Hemingway", "Ernest", LocalDate.parse("1899-07-21"), "Américain"));*/
+
 
 
             // Ajout des livres de fiction prédéfinis
@@ -66,6 +70,13 @@ public class Bibliotheque {
             ListemembreRegulars.add(new MembreRegular("Peeters", "Boulevard de l'Impératrice 15, 1000 Bruxelles", 123459, LocalDate.parse("2012-02-28"), 3));
             ListemembreRegulars.add(new MembreRegular("Simon", "Rue Royale 143, 1000 Bruxelles", 123460, LocalDate.parse("2018-04-11"), 0));
 
+            // Ajout des prêts prédéfinis
+            Listeprets.add(new Pret(ListelivreFictions.get(0), ListemembrePremium.get(0), LocalDate.now()));
+            Listeprets.add(new Pret(ListelivreNonFictions.get(1), ListemembrePremium.get(1), LocalDate.now()));
+            Listeprets.add(new Pret(ListelivreFictions.get(2), ListemembreRegulars.get(0), LocalDate.now()));
+            Listeprets.add(new Pret(ListelivreNonFictions.get(3), ListemembreRegulars.get(1), LocalDate.now()));
+            Listeprets.add(new Pret(ListelivreFictions.get(4), ListemembrePremium.get(2), LocalDate.now()));
+
         }
 
         public static Bibliotheque getInstance() {
@@ -96,6 +107,8 @@ public class Bibliotheque {
             Listeprets.add(pret);
         }
 
+       // public void ajouterPretRegular(Pret pret){ListepretsRegular.add(pret);}
+
         public void AjouterAuteur(Auteur auteur) {ListeAuteurs.add(auteur);}
 
         // Méthodes pour supprimer des éléments des listes
@@ -119,83 +132,68 @@ public class Bibliotheque {
             Listeprets.remove(pret);
         }
 
+
         public void supprimerAuteur(Auteur auteur) {ListeAuteurs.remove(auteur);}
 
-        // Méthodes pour modifier des éléments des listes
-        public void modifierLivreFiction(LivreFiction ancienLivre, LivreFiction nouveauLivre) {
-            int index = ListelivreFictions.indexOf(ancienLivre);
-            if (index != -1) {
-                ListelivreFictions.set(index, nouveauLivre);
-            }
-        }
-
-        public void modifierLivreNonFiction(LivreNonFiction ancienLivre, LivreNonFiction nouveauLivre) {
-            int index = ListelivreNonFictions.indexOf(ancienLivre);
-            if (index != -1) {
-                ListelivreNonFictions.set(index, nouveauLivre);
-            }
-        }
-
-        public void modifierMembrePremium(MembrePremium ancienMembre, MembrePremium nouveauMembre) {
-            int index = ListemembrePremium.indexOf(ancienMembre);
-            if (index != -1) {
-                ListemembrePremium.set(index, nouveauMembre);
-            }
-        }
-
-        public void modifierMembreRegular(MembreRegular ancienMembre, MembreRegular nouveauMembre) {
-            int index = ListemembreRegulars.indexOf(ancienMembre);
-            if (index != -1) {
-                ListemembreRegulars.set(index, nouveauMembre);
-            }
-        }
-
-        public void modifierPret(Pret pret, LocalDate dateRetour, boolean prolonge){
-            if(Listeprets.contains(pret))
-            {
-                int index = Listeprets.indexOf(pret);
-                Pret pretmodifier = Listeprets.get(index);
-
-                pretmodifier.setDateRetour(dateRetour);
-
-                Listeprets.set(index,pretmodifier);
-                System.out.println("Le prêt a été modifié avec succès.");
-            }
-            else
-            {
-                System.out.println("Le prêt n'a pas été trouvé dans la bibliothèque.");
-            }
-        }
-
-        public  void modifierAuteur(Auteur ancienauteur, Auteur nouveauauteurs)
-        {
-            int index = ListeAuteurs.indexOf(ancienauteur);
-            if(index !=-1)
-            {
-                ListeAuteurs.set(index,nouveauauteurs);
-            }
-        }
-
-        // Méthode pour obtenir la liste d'auteurs
         public ArrayList<Auteur> getListeAuteurs() {
-            return this.ListeAuteurs;
+            return ListeAuteurs;
         }
+         public void readCSVFile(String filePath) {
+            String csvDelimiter = ";";
+
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+
+                // Lecture de l'en-tête
+                line = br.readLine();
+                String[] headers = line.split(csvDelimiter);
+
+                // Vérification des colonnes
+                if (headers.length < 4 || !headers[0].equals("Nom") || !headers[1].equals("Prenom") || !headers[2].equals("DateNaissance") || !headers[3].equals("Nationalite")) {
+                    System.out.println("Le format du fichier CSV est incorrect.");
+                    return;
+                }
+
+                // Lecture des lignes de données
+                while ((line = br.readLine()) != null) {
+                    String[] data = line.split(csvDelimiter);
+
+                    // Vérification du nombre de colonnes
+                    if (data.length >= 4) {
+                        String nom = data[0];
+                        String prenom = data[1];
+                        String nationalite = data[3];
+
+                        try {
+                            LocalDate dateNaissance = LocalDate.parse(data[2]);
+                            Auteur auteur = new Auteur(nom, prenom, dateNaissance, nationalite);
+                            ListeAuteurs.add(auteur);
+                        } catch (DateTimeParseException e) {
+                            System.err.println("La date n'a pas pu être parsée: " + e.getMessage());
+                        }
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
 
         public  ArrayList<Pret> getListeprets(){
-            return  this.Listeprets;
+            return  Listeprets;
         }
+
         public  ArrayList<MembrePremium> getListemembrePremium(){
-            return  this.ListemembrePremium;
+            return  ListemembrePremium;
         }
         public  ArrayList<MembreRegular> getListemembreRegulars(){
-            return  this.ListemembreRegulars;
+            return  ListemembreRegulars;
         }
-        public  ArrayList<LivreFiction> getListelivreFictions(){return this.ListelivreFictions;
+        public  ArrayList<LivreFiction> getListelivreFictions(){return ListelivreFictions;
         }
         public  ArrayList<LivreNonFiction> getListelivreNonFictions(){
-            return this.ListelivreNonFictions;
+            return ListelivreNonFictions;
         }
-
-
 
 }

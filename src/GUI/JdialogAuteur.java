@@ -3,6 +3,7 @@ package GUI;
 
 import Auteur.Auteur;
 import Bibliotheque.Bibliotheque;
+import ressources.DataSerialiser;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import ressources.*;
 
 public class JdialogAuteur extends JDialog {
     private JPanel contentPane;
@@ -22,6 +25,10 @@ public class JdialogAuteur extends JDialog {
     private JButton supprimerButton;
     private JButton modifierButton;
     private JTable table1;
+    private JButton saveButton;
+    private JButton loadButton;
+
+    private DataSerialiser serialiser = new DataSerialiser();
 
     public void remplirTableauAvecAuteurs() {
         // Récupérer le DefaultTableModel
@@ -59,6 +66,7 @@ public class JdialogAuteur extends JDialog {
         // Appliquer ce modèle à votre table
         table1.setModel(model);
 
+        Bibliotheque.getInstance().readCSVFile("src\\ressources\\ListeAuteurs.csv");
         this.remplirTableauAvecAuteurs();
 
 
@@ -115,12 +123,6 @@ public class JdialogAuteur extends JDialog {
 
         });
 
-        modifierButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
 
 
 
@@ -129,7 +131,7 @@ public class JdialogAuteur extends JDialog {
 
     public static void main(String[] args) {
         JdialogAuteur dialog = new JdialogAuteur(null, true, "Auteur");
-        //dialog.pack();
+
         dialog.setVisible(true);
         System.exit(0);
     }

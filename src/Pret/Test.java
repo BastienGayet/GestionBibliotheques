@@ -25,7 +25,7 @@ public class Test
 
         MembrePremium mp= new MembrePremium();
 
-        Pret p = new Pret(null, mp, null,null);
+        Pret p = new Pret(null, mp, null);
 
 
     }

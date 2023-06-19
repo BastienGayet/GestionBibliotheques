@@ -38,8 +38,6 @@ public class MembrePremium extends Membre
 
     @Override
     public String toString() {
-        return super.toString() + "MembrePremium{" +
-                "prixAbo=" + prixAbo +
-                '}';
+        return   "Membre Premium n°" + getNumeroMembre() + " - " + getNom();
     }
 }

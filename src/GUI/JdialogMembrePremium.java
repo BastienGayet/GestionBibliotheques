@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 public class JdialogMembrePremium extends JDialog {
     private JPanel contentPane;
     private JButton ajouterButton;
-    private JButton modifierButton;
     private JTextField textFieldNom;
     private JTextField textFieldAdresse;
     private JTextField textFieldNumMembre;

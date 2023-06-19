@@ -11,7 +11,6 @@ public class JdialogLivreFiction extends JDialog {
     private JPanel contentPane;
     private JButton ajouterButton;
     private JButton supprimerButton;
-    private JButton modifierButton;
     private JTextField textFieldTitre;
     private JTextField textFieldAuteur;
     private JTextField textFieldPrix;

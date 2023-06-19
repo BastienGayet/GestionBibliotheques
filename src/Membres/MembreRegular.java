@@ -26,9 +26,7 @@ public class MembreRegular  extends Membre
 
     @Override
     public String toString() {
-        return  super.toString() +"MembreRegular{" +
-                "nbrLivreMax=" + nbrLivreMax +
-                '}';
+        return  "Membre Regular n°" + getNumeroMembre() + " - " + getNom();
     }
 
     @Override

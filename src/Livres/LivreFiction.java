@@ -25,9 +25,7 @@ public class LivreFiction extends Livre
 
     @Override
     public String toString() {
-        return super.toString() + "LivreFiction{" +
-                "genre='" + genre + '\'' +
-                '}';
+        return getTitre() + "-Fiction";
     }
    /* public void Affiche() {
         System.out.println(this);

@@ -22,7 +22,7 @@ public class Main {
         Membre membre1 = new Membre("Dupont", "3 rue des Lilas, Paris", 123456, LocalDate.now());
         MembreRegular membre= new MembreRegular("Gayet","rue d ela chapelle 11 4347 fexhe", 123456789,LocalDate.now() ,5);
         // Création d'un prêt
-        Pret pret1 = new Pret(livre1, membre1, LocalDate.of(2022, 4, 1), LocalDate.of(2022, 4, 15));
+        Pret pret1 = new Pret(livre1, membre1, LocalDate.of(2022, 4, 1));
 
         membre.Affiche();
 
