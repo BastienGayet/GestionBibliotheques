@@ -3,7 +3,7 @@ package Auteur;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Auteur
+public class Auteur implements Serializable
 {
     private String nom;
     private String prenom;
@@ -59,10 +59,10 @@ public class Auteur
     @Override
     public String toString() {
         return "Auteur" +
-                "nom='" + nom + '\'' +
-                ", prenom='" + prenom + '\'' +
+                "nom='" + nom +
+                ", prenom='" + prenom +
                 ", dateNaissance=" + dateNaissance +
-                ", nationalite='" + nationalite + '\'';
+                ", nationalite='" + nationalite;
     }
    public void Affiche() {
         System.out.println(this);

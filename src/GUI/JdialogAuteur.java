@@ -29,25 +29,10 @@ public class JdialogAuteur extends JDialog {
     private JButton loadButton;
 
     private DataSerialiser serialiser = new DataSerialiser();
+    private ArrayList<Auteur> auteurs;
 
-    public void remplirTableauAvecAuteurs() {
-        // Récupérer le DefaultTableModel
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
 
-        // Parcourir la liste d'auteurs
-        for (Auteur auteur : Bibliotheque.getInstance().getListeAuteurs()) {
-            // Créer un tableau avec les données de l'auteur
-            Object[] row = new Object[] {
-                    auteur.getNom(),
-                    auteur.getPrenom(),
-                    auteur.getDateNaissance(),
-                    auteur.getNationalite()
-            };
 
-            // Ajouter la ligne à la table
-            model.addRow(row);
-        }
-    }
     public JdialogAuteur( JFrame parent, boolean modal , String titre) {
         super(parent, modal);
         setTitle(titre);
@@ -66,7 +51,7 @@ public class JdialogAuteur extends JDialog {
         // Appliquer ce modèle à votre table
         table1.setModel(model);
 
-        Bibliotheque.getInstance().readCSVFile("src\\ressources\\ListeAuteurs.csv");
+       // Bibliotheque.getInstance().readCSVFile("src\\ressources\\ListeAuteurs.csv");
         this.remplirTableauAvecAuteurs();
 
 
@@ -113,6 +98,7 @@ public class JdialogAuteur extends JDialog {
 
                     Bibliotheque.getInstance().supprimerAuteur(auteur);
 
+
                     DefaultTableModel model = (DefaultTableModel) table1.getModel();
                     model.removeRow(selectedRow);
                 } else {
@@ -124,8 +110,43 @@ public class JdialogAuteur extends JDialog {
         });
 
 
+        saveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+                String filePath = "ListeAuteurs.csv";
+                System.out.println(Bibliotheque.getInstance().getListeAuteurs());
+                serialiser.saveAuteur( Bibliotheque.getInstance().getListeAuteurs(),filePath);
 
+            }
+        });
+        loadButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String filePath =  "ListeAuteurs.csv";;
+                ArrayList<Auteur> auteurs = serialiser.loadAuteur(filePath);
+                Bibliotheque.getInstance().setListeAuteurs(auteurs); // Met à jour la liste des auteurs dans la bibliothèque
+                remplirTableauAvecAuteurs(); // Met à jour la table
+            }
+        });
+    }
+    public void remplirTableauAvecAuteurs() {
+        // Récupérer le DefaultTableModel
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+
+        // Parcourir la liste d'auteurs
+        for (Auteur auteur : Bibliotheque.getInstance().getListeAuteurs()) {
+            // Créer un tableau avec les données de l'auteur
+            Object[] row = new Object[] {
+                    auteur.getNom(),
+                    auteur.getPrenom(),
+                    auteur.getDateNaissance(),
+                    auteur.getNationalite()
+            };
+
+            // Ajouter la ligne à la table
+            model.addRow(row);
+        }
     }
 
 
